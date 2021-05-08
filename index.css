@@ -1,0 +1,107 @@
+html {
+    height: 100vh;
+    font-family: Baloo;
+}
+
+body {
+    padding: 10px;
+    background-image: linear-gradient(#5DA4D9, #FFF);
+}
+
+h1 {
+    letter-spacing: 2px;
+    text-align: center;
+    color: white;
+}
+
+h2 {
+    letter-spacing: 1.5px;
+    text-align: center;
+    color: black;
+}
+
+button {
+    font-family: Baloo;
+    letter-spacing: px;
+    background: darkcyan;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin: 0 4px;
+}
+
+.buttons-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 40px;
+}
+
+#ajouter-btn {
+    background-color: #80D87F;
+}
+
+#agenda-container, #ajout-container, #consulter-container{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#consulter-container{
+    text-align: center;
+}
+
+#agenda-container .event{
+    margin-bottom: 30px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color:#E23349;
+    display: grid;
+    
+    color: white;
+    grid-template-columns: repeat(2, auto) 30px;
+    grid-template-areas: 
+        "title title voir"
+        "debut duree duree";
+}
+
+.event .title{
+    grid-area: title;
+    justify-self: center;
+}
+
+.event .debut{
+    grid-area: debut;
+    justify-self: left;
+}
+
+.event .duree{
+    grid-area: duree;
+    justify-self: right;
+}
+.event .voir {
+    grid-area: voir;
+}
+#ajout-container div {
+    margin-bottom: 1.5em;
+}
+
+#ajout-container input{
+    width: 100%;
+}
+
+input {
+    margin: 0 auto;
+    display: block;
+    border: none;
+    height: 30px;
+    background: white;
+    border-radius: 6px;
+    text-align: center;
+}
+
+
+
+
+
+

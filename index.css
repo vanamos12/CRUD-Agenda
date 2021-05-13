@@ -88,11 +88,14 @@ button {
 
 #ajout-container input{
     width: 100%;
+    display:block;
 }
-
-input {
-    margin: 0 auto;
-    display: block;
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+input, select {
     border: none;
     height: 30px;
     background: white;

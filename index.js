@@ -33,7 +33,7 @@ validerAjoutBtn.addEventListener("submit", function(e){
     emailEL.value = ''
     telEL.value = ''
     maxNumber++
-    renderAddresses()
+    renderAddressesTop()
 })
 
 function showOneContainer(containerId){
@@ -42,16 +42,35 @@ function showOneContainer(containerId){
     document.getElementById(containerId).style.display="block"
 }
 
-function renderAddresses() {
+function renderAddressesTop() {
     showOneContainer("list-container")
     const agendaContainer = document.getElementById("agenda-container")
     agendaContainer.innerHTML = ""
     if (myAddresses.length == 0){
         agendaContainer.innerHTML = getEmptyCarnetInformation()
     }else{
-        agendaContainer.innerHTML = myAddresses.map(event => getHtmlPresentationAddress(event)).join('')
+        agendaContainer.innerHTML = getHtmlAgendaContainer(myAddresses)
     }
 
+    connectSeeAddresses()
+   
+    const searchEl = document.getElementById("search-input")
+    const sortEl = document.getElementById("sort-select")
+    if (searchEl){
+        searchEl.addEventListener("keyup", function(e){
+            renderAddresses(searchEl.value, sortEl.value, myAddresses)
+        })
+    }
+    
+    if (sortEl){
+        sortEl.addEventListener("change", function(e){
+            renderAddresses(searchEl.value, sortEl.value, myAddresses)
+        })
+    }
+}
+
+function connectSeeAddresses(){
+     
     document.querySelectorAll(".event .voir").forEach(item => {
         item.addEventListener("click", function(e){
             const positionInArray = myAddresses.findIndex(item => item.id === parseInt(e.target.getAttribute("position")))
@@ -61,6 +80,53 @@ function renderAddresses() {
             showOneContainer('consulter-container')
         })
     })
+
+}
+
+function renderAddresses(search, sort, values){
+    if (search) {
+        values = values.filter(item => item.nom.startsWith(search))
+    }
+    if (sort === 'a-z') {
+        values.sort((a, b) => {
+            if (a.nom < b.nom){
+                return -1
+            }
+            if (a.nom > b.nom){
+                return 1
+            }
+            return 0
+        })
+    }
+    if (sort === 'z-a') {
+        values.sort((a, b) => {
+            if (a.nom > b.nom){
+                return -1
+            }
+            if (a.nom < b.nom){
+                return 1
+            }
+            return 0
+        })
+    }
+    document.getElementById("addresses").innerHTML = values.map(event => getHtmlPresentationAddress(event)).join('')
+    connectSeeAddresses()
+}
+
+function getHtmlAgendaContainer(addresses){
+    return `
+    <div class="filters">
+        <input type="text" placeholder="Rechercher" id="search-input" class="search" />
+        <select id="sort-select" class="sort">
+            <option value="ranger" disabled selected>Ranger</option>
+            <option value="a-z">A-Z</option> 
+            <option value="z-a">Z-A</option>
+        </select>
+    </div>
+    <div class="addresses" id="addresses">
+        ${addresses.map(event => getHtmlPresentationAddress(event)).join('')}
+    </div>
+`
 }
 
 function getHtmlPresentationAddresseTotale(address){
@@ -91,4 +157,4 @@ function getEmptyCarnetInformation(){
     `
 }
 
-renderAddresses()
+renderAddressesTop()

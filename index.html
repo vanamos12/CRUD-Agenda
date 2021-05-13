@@ -3,7 +3,7 @@
     <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
         <link rel="stylesheet" href="index.css">
         <link href="https://fonts.googleapis.com/css2?family=Baloo&display=swap" rel="stylesheet">
-        <title>Application Agenda</title>
+        <title>Application Carnet d'adresse</title>
     </head>
     <body>
         
